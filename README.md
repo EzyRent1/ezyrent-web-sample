@@ -18,7 +18,6 @@ Welcome to the **EzyRent Web** repository! This project is the web version of Ez
 8. [Contact](#contact)
 ---
 ## Branch Overview
-
 ### 1. **Main**
 
 - Production-ready branch containing the stable version of the application.
