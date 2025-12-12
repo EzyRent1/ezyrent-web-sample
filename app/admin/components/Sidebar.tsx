@@ -199,10 +199,10 @@ export default function Sidebar({
                     onKeyDown={(e) => handleKeyDown(e, index)}
                   >
                     <div className="w-10">
-                      <Icon className="size-6" />
+                      <Icon className="size-4" />
                     </div>
                     <span
-                      className={`capitalize whitespace-nowrap overflow-hidden transition-all duration-300 ${
+                      className={`capitalize text-sm whitespace-nowrap overflow-hidden transition-all duration-300 ${
                         isSidebarVisible
                           ? 'w-auto opacity-100'
                           : 'w-0 opacity-0'

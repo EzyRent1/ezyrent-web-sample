@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import NumberLabel from './label';
+import NumberLabel from '../../../components/common/label';
 import { UseFormWatch } from 'react-hook-form';
 import { useNumberWithCommas } from '@/hooks/useNumberWithComa';
 import MediaPreview from './mediaPreview';

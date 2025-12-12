@@ -21,11 +21,11 @@ import {
   rentDurations
 } from '@/app/admin/constants/property-form';
 import { Checkbox } from '@/components/ui/checkbox';
-import MediaUploadField from './mediaUploadField';
+import MediaUploadField from '../../../components/common/mediaUploadField';
 import { Label } from '@/components/ui/label';
-import SelectionButton from './selectionButton';
-import FormError from './FormError';
-import NumberLabel from './label';
+import SelectionButton from '../../../components/common/selectionButton';
+import FormError from '../../../components/common/FormError';
+import NumberLabel from '../../../components/common/label';
 import ErrorSummary from './ErrorSummary';
 import RenderSelectionSection from './renderSelection';
 import AddressAutocomplete from '@/components/LocationSearchInput';
@@ -35,11 +35,7 @@ interface ListingFormProps {
   errors: FieldErrors<PropertyFormData>;
   watch: UseFormWatch<PropertyFormData>;
   setValue: UseFormSetValue<PropertyFormData>;
-  handlePrimaryFileUpload: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    type: 'primary' | 'other'
-  ) => void;
-  handleOtherFileUpload: (
+  handleFileUpload: (
     e: React.ChangeEvent<HTMLInputElement>,
     type: 'primary' | 'other'
   ) => void;
@@ -64,8 +60,7 @@ export default function ListingForm({
   errors,
   watch,
   setValue,
-  handlePrimaryFileUpload,
-  handleOtherFileUpload,
+  handleFileUpload,
   handleSaveDraft,
   onDragEnter,
   onDragLeave,
@@ -153,7 +148,7 @@ export default function ListingForm({
               <MediaUploadField
                 label="Primary file"
                 type="primary"
-                handleFileUpload={(e) => handlePrimaryFileUpload(e, 'primary')}
+                handleFileUpload={(e) => handleFileUpload(e, 'primary')}
                 isDragging={isDragging}
                 onDragEnter={onDragEnter}
                 onDragLeave={onDragLeave}
@@ -178,7 +173,7 @@ export default function ListingForm({
               <MediaUploadField
                 label="Other files"
                 type="other"
-                handleFileUpload={(e) => handleOtherFileUpload(e, 'other')}
+                handleFileUpload={(e) => handleFileUpload(e, 'other')}
                 isDragging={isDragging}
                 onDragEnter={onDragEnter}
                 onDragLeave={onDragLeave}
@@ -196,7 +191,7 @@ export default function ListingForm({
         </section>
 
         {/* Price */}
-        <div className="w-full md:w-[200px] h-auto">
+        <section className="w-full md:w-[200px] h-auto">
           <h2 className="text-[#000929] text-xl font-medium mb-3">Price</h2>
           <Controller
             name="price"
@@ -226,10 +221,10 @@ export default function ListingForm({
           <div className="mt-2">
             <FormError message={errors.price?.message} />
           </div>
-        </div>
+        </section>
 
         {/* Land size */}
-        <div className="w-full md:w-[250px] h-auto">
+        <section className="w-full md:w-[250px] h-auto">
           <h2 className="text-[#000929] text-xl font-medium mb-3">Room Size</h2>
           <Controller
             name="landSize"
@@ -247,10 +242,10 @@ export default function ListingForm({
           <div className="mt-2">
             <FormError message={errors.landSize?.message} />
           </div>
-        </div>
+        </section>
 
         {/* rentDuration */}
-        <div className="w-full md:w-[200px] h-auto">
+        <section className="w-full md:w-[200px] h-auto">
           <h2 className="text-[#000929] text-xl font-medium mb-3">
             Rent duration
           </h2>
@@ -276,10 +271,10 @@ export default function ListingForm({
           <div className="mt-2">
             <FormError message={errors.rentDuration?.message} />
           </div>
-        </div>
+        </section>
 
         {/* Building type */}
-        <div>
+        <section>
           <h2 className="text-[#000929] text-xl font-medium mb-3">
             Building Type
           </h2>
@@ -304,7 +299,7 @@ export default function ListingForm({
           <div className="mt-2">
             <FormError message={errors.propertyType?.message} />
           </div>
-        </div>
+        </section>
 
         {/* Beds and baths */}
         {[
@@ -332,7 +327,7 @@ export default function ListingForm({
         ))}
 
         {/* Amenities */}
-        <div>
+        <section>
           <h2 className="text-[#000929] text-xl font-medium mb-3">Amenities</h2>
           <Controller
             name="amenities"
@@ -374,7 +369,7 @@ export default function ListingForm({
           <div className="mt-2">
             <FormError message={errors.amenities?.message} />
           </div>
-        </div>
+        </section>
 
         {/* Address */}
         <section>

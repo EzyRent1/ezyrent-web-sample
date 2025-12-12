@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
         hostname: 'res.cloudinary.com',
         pathname: '**',
       },
+          {
+        protocol: "https",
+        hostname: "miro.medium.com",
+        pathname: "**",
+      },
     ],
   },
   reactStrictMode: true,

@@ -8,7 +8,7 @@ import { MoveLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import DashboardLayout from '@/app/admin/components/Layouts';
 import { propertyFormSchema } from '@/lib/validations';
-import { handleFileUploadOrDrop } from '@/lib/handleFileUploadOrDrop';
+import { handleFileUploadOrDropProperty } from '@/lib/handleFileUploadOrDrop';
 import { handleLocalStorage } from '@/lib/handleLocalStorage';
 import Preview from './components/Preview';
 import ListingForm from './components/ListingForm';
@@ -57,36 +57,51 @@ export default function CreateListing() {
   } = form;
 
   const formValues = watch();
-
+  const STORAGE_KEY = 'property_listing_draft';
   // save to storage on values change
   useEffect(() => {
-    const cleanup = handleLocalStorage.save(formValues);
+    const cleanup = handleLocalStorage.save<PropertyFormData>(
+      STORAGE_KEY,
+      formValues,
+      (data) => ({
+        ...data,
+        primaryFile: null,
+        otherFiles: []
+      })
+    );
     return () => cleanup();
   }, [formValues]);
 
   // Load from localStorage on component mount
   useEffect(() => {
-    handleLocalStorage.load(setValue);
+    handleLocalStorage.load(STORAGE_KEY, setValue);
   }, [setValue]);
 
   // upload file
   const handleFileUpload = (
     e: React.ChangeEvent<HTMLInputElement>,
-    type: 'primary' | 'other'
+    type: string
   ) => {
     e.preventDefault();
     if (!e.target?.files?.length) return;
-    handleFileUploadOrDrop(e.target.files, type, setValue, watch);
+    handleFileUploadOrDropProperty(
+      e.target.files,
+      type as 'primary' | 'other',
+      setValue,
+      watch
+    );
   };
 
   // drop file
-  const handleDrop = (
-    e: React.DragEvent<HTMLDivElement>,
-    type: 'primary' | 'other'
-  ) => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>, type: string) => {
     e.preventDefault();
     setIsDragging(false);
-    handleFileUploadOrDrop(e.dataTransfer.files, type, setValue, watch);
+    handleFileUploadOrDropProperty(
+      e.dataTransfer.files,
+      type as 'primary' | 'other',
+      setValue,
+      watch
+    );
   };
 
   // drag file
@@ -121,7 +136,11 @@ export default function CreateListing() {
   // handle draft
   const handleSaveDraft = () => {
     try {
-      handleLocalStorage.save(formValues);
+      handleLocalStorage.save(STORAGE_KEY, formValues, (data) => ({
+        ...data,
+        primaryFile: null,
+        otherFiles: []
+      }));
       toast.success('Draft saved successfully');
     } catch (error) {
       console.error('Error saving draft:', error);
@@ -176,7 +195,7 @@ export default function CreateListing() {
       }
 
       const formData = new FormData();
-
+      // appendFormData(data as unknown as Record<string, unknown>, formData);
       // Append other form fields
       formData.append('name', data.name);
       formData.append('address', data.address);
@@ -213,7 +232,7 @@ export default function CreateListing() {
 
       if (result.success) {
         toast.success('Property created successfully');
-        handleLocalStorage.remove();
+        handleLocalStorage.remove(STORAGE_KEY);
         router.push('/admin/property-management');
       } else {
         if (response.status === 401 || response.status === 403) {
@@ -262,8 +281,7 @@ export default function CreateListing() {
             watch={watch}
             setValue={setValue}
             onInputChange={setValue}
-            handlePrimaryFileUpload={(e) => handleFileUpload(e, 'primary')}
-            handleOtherFileUpload={(e) => handleFileUpload(e, 'other')}
+            handleFileUpload={handleFileUpload}
             onDragOver={(e) => handleDrag(e, true)}
             onDragEnter={(e) => handleDrag(e, true)}
             onDragLeave={(e) => handleDrag(e, false)}
