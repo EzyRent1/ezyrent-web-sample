@@ -78,7 +78,7 @@
     "lint-staged": "^16.2.7",
     "lodash": "^4.17.21",
     "lucide-react": "^0.456.0",
-    "next": "^15.0.3",
+    "next": "^15.0.7",
     "react": "^19.0.0",
     "react-countdown": "^2.3.6",
     "react-dom": "^19.0.0",
@@ -94,7 +94,7 @@
     "tailwind-merge": "^2.5.4",
     "zod": "^3.24.1"
   },
-    "lint-staged": {
+  "lint-staged": {
     "**/*.{js,ts,tsx}": [
       "prettier --write",
       "eslint --fix"
