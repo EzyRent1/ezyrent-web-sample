@@ -46,7 +46,7 @@ export default function ProductDetails({ params }: ProductDetailsProp) {
         err instanceof Error ? err.message : 'Failed to fetch properties';
       toast.error(errorMessage);
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     fetchPropertiesById();

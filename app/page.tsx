@@ -40,24 +40,32 @@ export default function Home() {
     };
 
     fetchLocation();
-  }, []);
+    console.log('Location:', location);
+  }, [location]);
   return (
     <div>
       <Header />
       <div>
         <HeroPage />
       </div>
-      <AboutUs />
-      <PropertiesCarousel title="Based on your location" location={location} />
-      <PropertiesCarousel title="Best deal" />
-      <AboutUsVideo />
-      <OfferSection />
-      <AboutUsCarousel />
-      <GetStarted />
-      <StartYourJourney />
-      <Testimonial />
-      <FAQs />
-      {/* <StartYourJourney /> */}
+      <main>
+        <AboutUs />
+        <PropertiesCarousel title="Based on location" />
+        <PropertiesCarousel
+          title="Best deal"
+          headingId="best-deals"
+          staticMode
+        />
+        <AboutUsVideo />
+        <OfferSection />
+        <AboutUsCarousel />
+        <GetStarted />
+        <StartYourJourney />
+        <Testimonial />
+        <FAQs />
+
+        {/* <StartYourJourney /> */}
+      </main>
       <Footer />
     </div>
   );

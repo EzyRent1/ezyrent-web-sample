@@ -1,9 +1,6 @@
-
 ## a notification that encourages users to download the mobile app. there will be link for android and iOS apps
 ## when a user clicks on the favorite and user is not signed in, redirect the user to sign and save the house id so that when the user login in and the house will be saved to the user favorite property/house
 ## when a user clicks on share icon, the OGUrl should have the image of the house picked
 ## on house listing, when a user clicks on a house, it will replace what we have in th details and then what was there previously will replace the new one in the house listing.
 ## same thing goes for the houses images under main image
-## Remove the search in hero banner and add dummy dropdown items
-## Book now should redirect to whatsapp
-## make other images to be slidable, add a video file.
+##

@@ -1,22 +1,29 @@
 import {
   Banknote,
-  Book,
+  CreditCard,
   House,
   LayoutDashboard,
   Star,
   TrendingUpDownIcon
 } from 'lucide-react';
+import { BiMessageRoundedDetail } from 'react-icons/bi';
+import { MdOutlineLibraryBooks } from 'react-icons/md';
+import { LuUsers } from 'react-icons/lu';
 
 export const siderbarItems: SidebarItemType[] = [
   { title: 'dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
   {
-    title: 'property management',
+    title: 'property Mgt.',
     href: '/admin/property-management',
     icon: House
   },
+  { title: 'messages', href: '/admin/messages', icon: BiMessageRoundedDetail },
+  { title: 'user Mgt.', href: '/admin/users', icon: LuUsers },
   { title: 'finance', href: '/admin/finance', icon: Banknote },
   { title: 'analytics', href: '/admin/analytics', icon: TrendingUpDownIcon },
-  { title: 'blogs', href: '/admin/blogs', icon: Book },
+
+  { title: 'tour Mgt.', href: '/admin/tour', icon: CreditCard },
+  { title: 'blogs', href: '/admin/blogs', icon: MdOutlineLibraryBooks },
   { title: 'reviews', href: '/admin/reviews', icon: Star }
 ];
 

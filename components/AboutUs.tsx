@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function AboutUs() {
   return (
-    <div className="bg-[#F0EFFB] mt-20 py-10 md:py-20">
+    <section id="about-us" className="bg-[#F0EFFB] mt-20 py-10 md:py-20">
       <div className=" max-w-[1440px] mx-auto px-5 md:px-10 lg:px-20 ">
         <div className="max-w-[42em] text-center mx-auto">
           <h2 className="capitalize text-[#7065F0] font-semibold text-[2.5rem] md:text-5xl md:leading-[67.2px] ">
@@ -21,6 +21,6 @@ export default function AboutUs() {
           of your home.
         </p>
       </div>
-    </div>
+    </section>
   );
 }

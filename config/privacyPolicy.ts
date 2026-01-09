@@ -132,7 +132,7 @@ export const privacyPolicySections: PrivacyPolicySection[] = [
       'If you have questions or concerns about this Privacy Policy, please contact us:',
       {
         items: [
-          'Email: support@ezrent.ng',
+          'Email: info@ezyrent.org',
           'Phone: +234 [8127-518-838]',
           'Address: Akoka, Yaba, Lagos, Nigeria'
         ]

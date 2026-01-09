@@ -13,7 +13,7 @@ export default function EmailSent() {
   const router = useRouter();
   const handleResend = () => {
     // Logic for resending the password reset email or api call
-    console.log('Resending email...');
+    // console.log('Resending email...');
     // Trigger the resend process,
   };
 

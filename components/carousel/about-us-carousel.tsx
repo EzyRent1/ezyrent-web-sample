@@ -52,11 +52,11 @@ export default function AboutUsCarousel() {
   };
 
   return (
-    <section className="py-12 bg-gray-100">
+    <section id="App-features" className="py-12 bg-gray-100">
       <div className="max-w-[1440px] mx-auto px-5 md:px-20  flex-1">
-        <h1 className="text-center mb-4 text-[#7065F0] font-semibold text-[2.1rem] md:text-5xl md:leading-[67.2px] ">
+        <h3 className="text-center mb-4 text-[#7065F0] font-semibold text-[2.1rem] md:text-5xl md:leading-[67.2px] ">
           App Only Features
-        </h1>
+        </h3>
         <Carousel
           setApi={setApi}
           className="w-full max-w-xs mx-auto sm:max-w-sm md:max-w-md lg:max-w-lg"
@@ -69,9 +69,9 @@ export default function AboutUsCarousel() {
                     <div className="border rounded-full shadow-sm p-3 bg-[#e9e8f0]">
                       <item.icon className="w-12 h-12 text-[#7065F0]" />
                     </div>
-                    <h3 className="text-lg md:text-2xl text-[#7065F0] font-semibold mb-2">
+                    <h4 className="text-lg md:text-2xl text-[#7065F0] font-semibold mb-2">
                       {item.title}
-                    </h3>
+                    </h4>
                     <p className="md:text-center text-justify text-[#000929] font-semibold">
                       {item.content}
                     </p>

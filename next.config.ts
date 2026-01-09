@@ -1,11 +1,10 @@
 import type { NextConfig } from 'next';
 
+//This has been handled in the middleware............
 // const allowedOrigin =
 //   process.env.NODE_ENV === 'production'
 //     ? "https://ezyrent-web.vercel.app"
 //     : "http://localhost:3000";
-
-
 
 
 const nextConfig: NextConfig = {
@@ -22,6 +21,11 @@ const nextConfig: NextConfig = {
         hostname: 'res.cloudinary.com',
         pathname: '**',
       },
+          {
+        protocol: "https",
+        hostname: "miro.medium.com",
+        pathname: "**",
+      },
     ],
   },
   reactStrictMode: true,
@@ -35,7 +39,7 @@ const nextConfig: NextConfig = {
       {
         source: "/(.*)",
         headers: [
-          { key: "Access-Control-Allow-Origin", value: "*" },
+          { key: "Access-Control-Allow-Origin", value: '*' },
           { key: "Access-Control-Allow-Methods", value: "GET, POST, PUT, DELETE, OPTIONS" },
           { key: "Access-Control-Allow-Headers", value: "Content-Type, Authorization, X-Requested-With" },
           { key: "Access-Control-Allow-Credentials", value: "true" },
@@ -49,7 +53,7 @@ const nextConfig: NextConfig = {
       {
         source: "/api/(.*)",
         headers: [
-          { key: "Access-Control-Allow-Origin", value: "http://localhost:3000" },
+          { key: "Access-Control-Allow-Origin", value: "*" },
           { key: "Access-Control-Allow-Methods", value: "OPTIONS, GET, POST, PUT, DELETE" },
           { key: "Access-Control-Allow-Headers", value: "Content-Type, Authorization" },
           { key: "Access-Control-Allow-Credentials", value: "true" },

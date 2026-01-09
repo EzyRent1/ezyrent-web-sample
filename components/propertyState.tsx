@@ -20,9 +20,13 @@ export const ErrorState = ({ message, onRetry }: ErrorStateProps) => (
   </div>
 );
 
-export const EmptyState = () => (
+export const EmptyState = ({
+  message = 'No properties found'
+}: {
+  message?: string;
+}) => (
   <div className="text-center py-20">
-    <p className="text-gray-500 font-semibold mb-4">No properties found</p>
+    <p className="text-gray-500 font-semibold mb-4">{message}</p>
   </div>
 );
 

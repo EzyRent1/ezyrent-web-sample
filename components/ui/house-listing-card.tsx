@@ -114,6 +114,9 @@ export default function HouseListingCard({
           src={mainImage}
           width={352}
           height={200}
+          sizes="(max-width: 640px) 100vw, 352px"
+          loading="lazy"
+          decoding="async"
           alt={`Image of a house located at ${address}.`}
           className="w-full object-cover h-full transition duration-150 ease-in-out group-hover:scale-[1.05]"
         />

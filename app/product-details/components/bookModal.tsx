@@ -3,11 +3,13 @@
 import MaxWidthWrapper from '@/app/maxWidthWrapper';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { MdWhatsapp } from 'react-icons/md';
+import { IconType } from 'react-icons/lib';
 
 interface costumerCare {
   label: string;
-  icon: string;
+  icon: string | IconType;
   title: string;
   placeholder: string;
 }
@@ -23,15 +25,15 @@ interface socialMedia {
 const costumerCare: costumerCare[] = [
   {
     label: 'phone',
-    icon: 'phone.svg',
-    title: 'Contact Number',
-    placeholder: '+234-8127-518-838'
+    icon: MdWhatsapp,
+    title: 'WhatsApp Number',
+    placeholder: '+234-7067-456-475'
   },
   {
     label: 'email',
     icon: 'email.svg',
     title: 'Email Address',
-    placeholder: 'ezyrent50@gmail.com'
+    placeholder: 'info@ezyrent.org'
   }
 ];
 
@@ -114,19 +116,24 @@ export default function ContactModal({
             Our Team will reach out to you as soon as possible!
           </p>
         </div>
-        <div className="flex-col md:flex md:flex-row  justify-between md:gap-4 md:px-10">
+        <div className="flex-col md:flex md:flex-row  justify-between md:gap-10 md:px-10">
           <div>
             <h2 className="text-[#475467]  text-[16px] mb-3">Customer Care</h2>
             {costumerCare.map((item, index) => (
-              <div key={index} className="flex items-center gap-10 mb-4">
-                <div className="flex items-center gap-4 md:mr-4">
-                  <Image
-                    className="w-8 h-8 object-contain"
-                    src={`/social-icon/modal/${item.icon}`}
-                    width={24}
-                    height={24}
-                    alt={`${item.label} svg`}
-                  />
+              <div key={index} className="flex  items-center gap-5 mb-4">
+                <div className="flex w-[200px] items-center gap-4">
+                  {item.icon && typeof item.icon === 'string' ? (
+                    <Image
+                      className="w-8 h-8 object-contain"
+                      src={`/social-icon/modal/${item.icon}`}
+                      width={24}
+                      height={24}
+                      alt={`${item.label} svg`}
+                    />
+                  ) : (
+                    <item.icon className="w-8 h-8" />
+                  )}
+
                   <div className="text-[14px]">
                     <p className="text-[#98A2B3]">{item.title}</p>
                     <p className="text-[#101828] font-semibold">

@@ -6,7 +6,10 @@ import Link from 'next/link';
 
 export default function GetStarted() {
   return (
-    <section className="my-20 py-5 md:max-h-[701px] bg-[#7065F0] text-[#f1f1f1] md:rounded-[40px]  md:mx-20">
+    <section
+      id="Get-started"
+      className="my-20 py-5 md:max-h-[701px] bg-[#7065F0] text-[#f1f1f1] md:rounded-[40px]  md:mx-20"
+    >
       <div className="max-w-[699px] mx-auto text-left md:text-center flex flex-col justify-between mb-8 px-4">
         <p className="  font-semibold text-[2.1rem] md:text-4xl mb-10 md:leading-[60px]">
           Ready to buy or rent your dream property?

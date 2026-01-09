@@ -4,10 +4,10 @@ import { Label } from '@/components/ui/label';
 
 interface MediaUploadFieldProps {
   label: string;
-  type: 'primary' | 'other';
+  type: string;
   handleFileUpload: (
     e: React.ChangeEvent<HTMLInputElement>,
-    type: 'primary' | 'other'
+    type: string
   ) => void;
   isDragging: boolean;
   isSubmitting: boolean;

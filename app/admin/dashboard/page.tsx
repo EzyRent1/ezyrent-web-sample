@@ -1,12 +1,16 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import DashboardLayout from '../components/Layouts';
+import Dashboard from '../components/dashboard';
 
 export default function Home() {
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
   return (
-    <DashboardLayout>
-      <div className="flex items-center justify-center">
-        Welcome, this page is still under construction
-      </div>
+    <DashboardLayout
+      title="Dashboard"
+      sidebarProps={{ onSidebarHoverChange: setIsSidebarExpanded }}
+    >
+      <Dashboard isSidebarExpanded={isSidebarExpanded} />
     </DashboardLayout>
   );
 }

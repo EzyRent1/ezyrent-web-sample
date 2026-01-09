@@ -7,7 +7,7 @@ import { MoveLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import DashboardLayout from '@/app/admin/components/Layouts';
 import { propertyFormSchema } from '@/lib/validations';
-import { handleFileUploadOrDrop } from '@/lib/handleFileUploadOrDrop';
+import { handleFileUploadOrDropProperty } from '@/lib/handleFileUploadOrDrop';
 // import { handleLocalStorage } from '@/lib/handleLocalStorage';
 import { toast } from 'sonner';
 import ListingForm from '../../create-listing/components/ListingForm';
@@ -131,7 +131,7 @@ export default function EditListing({ params }: EditListingProps) {
     const files = e.target.files;
     if (!files?.length) return;
 
-    handleFileUploadOrDrop(files, type, setValue, watch);
+    handleFileUploadOrDropProperty(files, type, setValue, watch);
   };
 
   // handle file drop
@@ -141,7 +141,7 @@ export default function EditListing({ params }: EditListingProps) {
   ) => {
     e.preventDefault();
     setIsDragging(false);
-    handleFileUploadOrDrop(e.dataTransfer.files, type, setValue, watch);
+    handleFileUploadOrDropProperty(e.dataTransfer.files, type, setValue, watch);
   };
 
   // handle file drag
@@ -254,8 +254,7 @@ export default function EditListing({ params }: EditListingProps) {
             watch={watch}
             setValue={setValue}
             onInputChange={setValue}
-            handlePrimaryFileUpload={(e) => handleFileUpload(e, 'primary')}
-            handleOtherFileUpload={(e) => handleFileUpload(e, 'other')}
+            handleFileUpload={handleFileUpload}
             onDragOver={(e) => handleDrag(e, true)}
             onDragEnter={(e) => handleDrag(e, true)}
             onDragLeave={(e) => handleDrag(e, false)}

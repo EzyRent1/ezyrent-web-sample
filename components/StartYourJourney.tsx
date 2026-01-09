@@ -33,7 +33,10 @@ const StartYourJourney: React.FC = () => {
   };
 
   return (
-    <div className="mt-10 max-w-[1440px] mx-auto px-5 md:px-10 lg:px-20 ">
+    <section
+      id="Video-playlist"
+      className="mt-10 max-w-[1440px] mx-auto px-5 md:px-10 lg:px-20 "
+    >
       {/* Video content */}
       <div className="my-10 w-full md:h-[496px] grid md:grid-cols-2 gap-5">
         <div className="relative rounded-lg w-full border h-[250px] md:h-full overflow-hidden">
@@ -107,7 +110,7 @@ const StartYourJourney: React.FC = () => {
       </div>
 
       {/* action btn */}
-    </div>
+    </section>
   );
 };
 

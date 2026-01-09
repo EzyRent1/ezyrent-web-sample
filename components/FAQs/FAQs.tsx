@@ -10,7 +10,7 @@ export default function FAQs() {
   };
 
   return (
-    <section className="mt-40 mb-20">
+    <section id="FAQ" className="mt-40 mb-20">
       <div className="w-full max-w-[1440px] mx-auto px-5 md:px-20  flex-1">
         <h2 className="capitalize text-[#7065F0] font-semibold text-[2.1rem] md:text-5xl md:leading-[67.2px]">
           Frequently Asked Questions

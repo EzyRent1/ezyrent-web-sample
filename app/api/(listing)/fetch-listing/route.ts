@@ -12,6 +12,8 @@ export async function GET(req: NextRequest) {
     const sortOrder = searchParams.get('sortOrder') || 'desc';
     const minPrice = parseInt(searchParams.get('minPrice') || '0');
     const maxPrice = parseInt(searchParams.get('maxPrice') || '1000000');
+    const latitude = searchParams.get('latitude');
+    const longitude = searchParams.get('longitude');
 
     // Validate parameters
     if (page < 1) return new Response('Invalid page number', { status: 400 });
@@ -37,7 +39,9 @@ export async function GET(req: NextRequest) {
       // ...(minPrice >= 0 && { minPrice: minPrice.toString() }),
       // ...(maxPrice >= 0 && { maxPrice: maxPrice.toString() }),
       ...(sortBy && { sortBy }),
-      ...(sortOrder && { sortOrder })
+      ...(sortOrder && { sortOrder }),
+      ...(latitude && { userLatitude: latitude }),
+      ...(longitude && { userLongitude: longitude })
     });
 
     // Add parsed filters to query params
@@ -45,15 +49,15 @@ export async function GET(req: NextRequest) {
       queryParams.append(key, value as string);
     }
 
+    const hasLocation = !!latitude && !!longitude;
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/properties${hasLocation ? '/location' : ''}?${queryParams}`;
+
     // Fetch data from your API
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/properties?${queryParams}`,
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
+    const response = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json'
       }
-    );
+    });
 
     if (!response.ok) {
       throw new Error(`API responded with status: ${response.status}`);

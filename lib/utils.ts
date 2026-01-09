@@ -57,3 +57,15 @@ export const fetchLocationCoordinates = async (address: string) => {
     return null;
   }
 };
+
+export const formatDateTime = (date: string, time: string) => {
+  const dateTime = new Date(`${date.split('T')[0]}T${time}`);
+  return dateTime.toLocaleString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true
+  });
+};

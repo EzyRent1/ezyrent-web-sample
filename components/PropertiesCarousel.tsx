@@ -2,23 +2,31 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useWindowResizer } from '@/hooks/useWindowResizer';
 import { cn } from '@/lib/utils';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
-import { EmptyState, ErrorState } from '@/components/propertyState';
+import {
+  EmptyState,
+  ErrorState,
+  LoadingState
+} from '@/components/propertyState';
 import HouseListingCard from '@/components/ui/house-listing-card';
 import Link from 'next/link';
+import { Input } from '@/components/ui/input';
+import { useDebounce } from '@/hooks/useDebounce';
 
-interface Location {
-  latitude: number;
-  longitude: number;
-}
+// interface Location {
+//   latitude: number;
+//   longitude: number;
+// }
 
 interface PropertiesCarousel {
   title: string;
-  location?: Location | null;
+  staticMode?: boolean;
+  headingId?: string;
 }
 
 export default function PropertiesCarousel({
   title,
-  location
+  staticMode = false,
+  headingId = 'location-houses-heading'
 }: PropertiesCarousel) {
   const [houseListing, setHouseListing] = useState<HouseListing[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,15 +36,24 @@ export default function PropertiesCarousel({
     'slideRight' | 'slideLeft'
   >('slideRight');
 
+  const [search, setSearch] = useState('');
+
+  const debouncedSearch = useDebounce(search, 1000);
+
   const { isLargeScreen } = useWindowResizer();
 
   // make api call
-  const fetchProperties = useCallback(async (location?: Location) => {
+  const fetchProperties = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
+      const queryParams = new URLSearchParams();
 
-      const url = `/api/fetch-listing${location ? `?userLatitude=${location.latitude}&userLongitude=${location.longitude}` : ''}`;
+      if (staticMode === false) {
+        queryParams.set('search', debouncedSearch || '');
+      }
+
+      const url = `/api/fetch-listing?${queryParams.toString()}`;
       const response = await fetch(url, {
         headers: { 'Content-Type': 'application/json' }
       });
@@ -56,15 +73,24 @@ export default function PropertiesCarousel({
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [debouncedSearch, staticMode]);
 
   useEffect(() => {
-    // We can go ahead and fetch properties if location is available or undefined
-    // If it is null, we wait for the user to provide a location
-    if (location !== null) {
-      void fetchProperties(location);
+    if (staticMode) {
+      // Only fetch once on mount for static carousel
+      void fetchProperties();
+    } else {
+      setLoading(false);
     }
-  }, [fetchProperties, location]);
+  }, [staticMode, fetchProperties]);
+
+  useEffect(() => {
+    // Dynamic carousel: run search-only fetch when user types
+    if (!staticMode && debouncedSearch) {
+      setLoading(true);
+      void fetchProperties();
+    }
+  }, [debouncedSearch, staticMode, fetchProperties]);
 
   const itemsPerPage = isLargeScreen ? 6 : 3;
   const isAtStart = currentIndex === 0;
@@ -89,20 +115,36 @@ export default function PropertiesCarousel({
     currentIndex + itemsPerPage
   );
 
+  const renderEmptyState = () => {
+    if (!staticMode) {
+      return !debouncedSearch ? (
+        <></>
+      ) : (
+        <EmptyState message="No property in your current/search location" />
+      );
+    } else {
+      return <EmptyState />;
+    }
+  };
+
   return loading ? (
-    <></>
+    !staticMode && debouncedSearch ? (
+      <LoadingState />
+    ) : (
+      <></>
+    )
   ) : (
     <section
       className="max-w-[1440px] py-10 lg:py-20 mx-auto px-5 md:px-10 lg:px-20 "
-      aria-labelledby="location-houses-heading"
+      aria-labelledby={headingId}
     >
       <div className="flex items-center w-full">
-        <h3
-          id="location-houses-heading"
+        <h2
+          id={headingId}
           className="first-letter:capitalize font-semibold md:text-[1.5rem] text-[#7065F0]"
         >
           {title}
-        </h3>
+        </h2>
         <div className="flex items-center space-x-10 ml-auto">
           <button
             onClick={handlePrev}
@@ -132,11 +174,24 @@ export default function PropertiesCarousel({
         </div>
       </div>
 
+      {!staticMode && (
+        <div className="flex mt-4 items-center justify-center ">
+          <div className="space-y-2 w-full max-w-md">
+            <Input
+              disabled={loading}
+              placeholder="Enter location to search..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="border rounded-3xl p-6 md:mt-2"
+            />
+          </div>
+        </div>
+      )}
       <div className="flex flex-col justify-center">
         {error ? (
           <ErrorState message={error} onRetry={fetchProperties} />
         ) : visibleHouses.length === 0 ? (
-          <EmptyState />
+          renderEmptyState()
         ) : (
           <div className="mt-5 grid sm:grid-cols-[repeat(auto-fill,_minmax(280px,_1fr))] gap-6 p-2">
             {visibleHouses.map((house, index) => (

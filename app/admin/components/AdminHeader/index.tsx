@@ -1,11 +1,11 @@
 'use client';
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Menu, Plus, Search } from 'lucide-react';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useWindowResizer } from '@/hooks/useWindowResizer';
+import { usePathname } from 'next/navigation';
 
 type AdminHeaderPropType = {
   title: string | undefined;
@@ -24,7 +24,10 @@ export default function AdminHeader({
     alert('Profile clicked!');
   };
   const { windowWidth } = useWindowResizer();
+  const pathName = usePathname();
   const hideTitle = windowWidth <= 768 && handleClick;
+
+  const pathswithoutSearchBar = ['/admin/messages', '/admin/users'];
 
   return (
     <header
@@ -53,18 +56,20 @@ export default function AdminHeader({
       )}
 
       {/* Search */}
-      <div className="hidden lg:block relative" role="search">
-        <label htmlFor="search-input" className="sr-only">
-          Search {title}
-        </label>
-        <Input
-          id="search-input"
-          placeholder="Search"
-          aria-labelledby="search-input"
-          className="pl-5 pr-10 text-[1.25rem] w-[450px] h-[60px] rounded-[30px] focus-visible:ring-0 focus-visible:outline-0"
-        />
-        <Search className="absolute right-4 top-4" aria-hidden="true" />
-      </div>
+      {!pathswithoutSearchBar.includes(pathName) && (
+        <div className="hidden lg:block relative" role="search">
+          <label htmlFor="search-input" className="sr-only">
+            Search {title}
+          </label>
+          <Input
+            id="search-input"
+            placeholder="Search"
+            aria-labelledby="search-input"
+            className="pl-5 pr-10 text-[1.25rem] w-[450px] h-[60px] rounded-[30px] focus-visible:ring-0 focus-visible:outline-0"
+          />
+          <Search className="absolute right-4 top-4" aria-hidden="true" />
+        </div>
+      )}
 
       {/* Action Button */}
       <div className="flex items-center justify-between">

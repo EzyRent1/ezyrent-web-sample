@@ -4,7 +4,7 @@ import { testimonials } from '@/config/testimonial';
 
 export default function Testimonial() {
   return (
-    <div className="mt-20 md:mt-40 max-w-[1440px] mx-auto px-5 md:px-10 lg:px-20 ">
+    <section className="mt-20 md:mt-40 max-w-[1440px] mx-auto px-5 md:px-10 lg:px-20 ">
       <div className="max-w-[699px] mx-auto text-center mb-8 px-4">
         <p className="capitalize text-[#7065F0] font-semibold text-[2.5rem] md:text-5xl md:leading-[67.2px]">
           Reviews
@@ -26,6 +26,6 @@ export default function Testimonial() {
           <TestimonialCard testimonials={testimonials} />
         </div>
       </div>
-    </div>
+    </section>
   );
 }

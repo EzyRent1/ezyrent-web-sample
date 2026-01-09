@@ -13,13 +13,7 @@ export function middleware(request: NextRequest) {
   const allowedOrigin = (origin: string) => {
     return allowedOrigins.includes(origin) ? origin : 'http://localhost:3000';
   };
-
-  // const allowedOrigin =
-  //   process.env.NODE_ENV === 'production'
-  //     ? 'https://ezyrent-web.vercel.app'
-  //     : 'http://localhost:3000';
-
-  // Get auth token and password status from cookies
+  // Get auth token and password status from cookies......
   const authToken = request.cookies.get('ezyrent_auth_token')?.value;
 
   if (!isHttps && process.env.NODE_ENV === 'production') {

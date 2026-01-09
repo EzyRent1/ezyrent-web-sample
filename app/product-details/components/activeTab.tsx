@@ -11,10 +11,10 @@ import {
   Bath,
   BedDouble,
   Diamond,
-  Mail,
-  Phone
+  Mail
 } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
+import { MdWhatsapp } from 'react-icons/md';
 
 const DynamicHouseMap = dynamic(() => import('@/components/HouseMap'), {
   loading: () => <p>Loading...</p>,
@@ -78,12 +78,13 @@ export const RenderActiveTabContent = ({
           <div className="!my-10 space-y-2 text-[#344054] w-full lg:w-[500px]">
             <div className="w-full flex items-center justify-between">
               <p className="flex items-center space-x-2">
-                <Phone size={16} stroke="#344054" />
+                {/* <Phone size={16} stroke="#344054" /> */}
+                <MdWhatsapp size={16} stroke="#344054" />
                 {/* <span className="ml-2 text-base">{userInfo.phone}</span> */}
-                <span className="ml-2 text-base">{'+234-8127-518-838'}</span>
+                <span className="ml-2 text-base">{'+234-7067-456-475'}</span>
               </p>
               {/* <CopyToClipboard textToCo"py={userInfo.phone} type="phone" /> */}
-              <CopyToClipboard textToCopy={'+234-8127-518-838'} type="phone" />
+              <CopyToClipboard textToCopy={'+234-7067-456-475'} type="phone" />
             </div>
           </div>
           {/* )} */}
