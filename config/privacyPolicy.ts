@@ -73,7 +73,7 @@ export const privacyPolicySections: PrivacyPolicySection[] = [
           'Comply with legal and regulatory requirements.'
         ]
       },
-      'If you wish to delete your account or request data deletion, contact us at support@ezrent.ng.'
+      'If you wish to delete your account or request data deletion, contact us at info@ezyrent.org.'
     ]
   },
   {
@@ -105,7 +105,7 @@ export const privacyPolicySections: PrivacyPolicySection[] = [
           'Objection: Opt-out of certain data processing activities, including marketing communications.'
         ]
       },
-      'To exercise these rights, contact us at support@ezrent.ng.'
+      'To exercise these rights, contact us at info@ezyrent.org.'
     ]
   },
   {
@@ -133,8 +133,9 @@ export const privacyPolicySections: PrivacyPolicySection[] = [
       {
         items: [
           'Email: info@ezyrent.org',
-          'Phone: +234 [8127-518-838]',
-          'Address: Akoka, Yaba, Lagos, Nigeria'
+          'Blog: https://ezyrent.medium.com',
+          'Phone: +234 [8127-518-838]'
+          // 'Address: Akoka, Yaba, Lagos, Nigeria'
         ]
       }
     ]

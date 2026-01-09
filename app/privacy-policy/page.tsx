@@ -21,16 +21,30 @@ export default function PrivacyPolicy() {
     }
 
     // Handle email links
-    if (content.includes('support@ezrent.ng')) {
-      const parts = content.split('support@ezrent.ng');
+    if (content.includes('info@ezyrent.org')) {
+      const parts = content.split('info@ezyrent.org');
+      return (
+        <>
+          {parts[0]}
+          <a href="mailto:info@ezyrent.org" className="text-blue-500 underline">
+            info@ezyrent.org
+          </a>
+          {parts[1]}
+        </>
+      );
+    }
+
+    // Handle blog links
+    if (content.includes('https://ezyrent.medium.com')) {
+      const parts = content.split('https://ezyrent.medium.com');
       return (
         <>
           {parts[0]}
           <a
-            href="mailto:support@ezrent.ng"
+            href="https://ezyrent.medium.com"
             className="text-blue-500 underline"
           >
-            support@ezrent.ng
+            https://ezyrent.medium.com
           </a>
           {parts[1]}
         </>
