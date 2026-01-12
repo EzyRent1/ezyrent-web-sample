@@ -1,49 +1,48 @@
-const STORAGE_KEY = 'property_listing_draft';
-
 export const handleLocalStorage = {
-  save: (formValues: PropertyFormData) => {
+  save: <T>(
+    key: string,
+    data: T,
+    sanitize?: (data: T) => Partial<T> // optional sanitizer
+  ) => {
     const saveTimeout = setTimeout(() => {
       try {
-        const saveData: Partial<PropertyFormData> = {
-          ...formValues,
-          primaryFile: null, // Don't save file data
-          otherFiles: [] // Don't save file data
-        };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(saveData));
+        const saveData = sanitize ? sanitize(data) : data;
+        localStorage.setItem(key, JSON.stringify(saveData));
       } catch (error) {
-        console.error('Error saving draft:', error);
+        console.error('Error saving data:', error);
       }
     }, 1000);
 
     return () => clearTimeout(saveTimeout);
   },
 
-  load: (
-    setValue: (
-      field: keyof PropertyFormData,
-      value: PropertyFormData[keyof PropertyFormData]
-    ) => void
+  load: <T>(
+    key: string,
+    setValue: (field: keyof T, value: T[keyof T]) => void
   ) => {
     try {
-      const savedDraft = localStorage.getItem(STORAGE_KEY);
-      if (savedDraft) {
-        const parsedDraft: Partial<PropertyFormData> = JSON.parse(savedDraft);
-        Object.entries(parsedDraft).forEach(([key, value]) => {
+      const saved = localStorage.getItem(key);
+      if (saved) {
+        const parsed: Partial<T> = JSON.parse(saved);
+        const entries = Object.entries(
+          parsed as Partial<Record<keyof T, T[keyof T]>>
+        ) as [keyof T, T[keyof T]][];
+        entries.forEach(([field, value]) => {
           if (value !== null && value !== undefined) {
-            setValue(key as keyof PropertyFormData, value);
+            setValue(field, value);
           }
         });
       }
     } catch (error) {
-      console.error('Error retrieving draft:', error);
+      console.error('Error retrieving data:', error);
     }
   },
 
-  remove: () => {
+  remove: (key: string) => {
     try {
-      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(key);
     } catch (error) {
-      console.error('Error removing draft:', error);
+      console.error('Error removing data:', error);
     }
   }
 };

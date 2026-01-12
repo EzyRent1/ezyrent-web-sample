@@ -172,3 +172,48 @@ export const propertyFormSchema = z.object({
 });
 
 export type PropertyFormData = z.infer<typeof propertyFormSchema>;
+
+export const blogPostSchema = z.object({
+  title: z
+    .string()
+    .min(1, 'Title is required')
+    .max(100, 'Title must be less than 100 characters'),
+
+  content: z
+    .string()
+    .min(1, 'Content is required')
+    .max(5000, 'Content must be less than 5000 characters'),
+
+  image: z
+    .custom<File | null>()
+    .refine((file) => file !== undefined, 'Cover image is required')
+    .refine((file) => {
+      if (!file) return false;
+      return isValidFileType(file);
+    }, 'Cover image must be an image (JPEG, PNG, GIF, WEBP)')
+    .refine((file) => {
+      if (!file) return false;
+      return file.size <= 10 * 1024 * 1024; // 10MB limit
+    }, 'Cover image size must be less than 10MB'),
+  video: z
+    .custom<File | null>()
+    .optional()
+    .refine((file) => {
+      if (!file) return true;
+      return isValidFileType(file);
+    }, 'Cover video must be a video (MP4, WEBM, OGG)')
+    .refine((file) => {
+      if (!file) return true;
+      return file.size <= 50 * 1024 * 1024; // 50MB limit
+    }, 'Cover video size must be less than 50MB'),
+
+  tags: z
+    .array(z.string())
+    .min(1, 'Please select at least one tag')
+    .max(5, 'You can select up to 5 tags only'),
+
+  error: z.null().optional(),
+  errorMessage: z.null().optional()
+});
+
+export type BlogPostFormData = z.infer<typeof blogPostSchema>;

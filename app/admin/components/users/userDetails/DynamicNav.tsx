@@ -19,7 +19,7 @@ export const DetailNav = ({ currentState }: DetailNavProps) => {
     <section className="flex  justify-between gap-2 md:gap-5 p-1 bg-[#F4F4F4] w-full">
       {(['overview', 'assigned', 'inspection'] as NavState[]).map(
         (state: NavState) => {
-          let fullStateText = state.charAt(0).toUpperCase() + state.slice(1);
+          const fullStateText = state.charAt(0).toUpperCase() + state.slice(1);
           return (
             <button
               className={`flex-1 text-center text-xs md:text-base p-2 ${navState === state ? 'font-bold bg-[#FFFFFF]' : 'text-[#999999] hover:text-black hover:font-bold'}`}

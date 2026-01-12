@@ -11,7 +11,8 @@ const config: Config = {
       colors: {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
-        primaryPurple: '#7065F0'
+        primaryPurple: '#7065F0',
+        greyText: '#666666'
       },
       keyframes: {
         shake: {
