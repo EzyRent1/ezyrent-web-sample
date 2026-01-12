@@ -134,10 +134,29 @@ export const privacyPolicySections: PrivacyPolicySection[] = [
         items: [
           'Email: info@ezyrent.org',
           'Blog: https://ezyrent.medium.com',
-          'Phone: +234 [8127-518-838]'
+          'WhatsApp: https://wa.link/v7j5ie'
           // 'Address: Akoka, Yaba, Lagos, Nigeria'
         ]
       }
     ]
+  }
+];
+
+export const SPECIAL_TOKENS = [
+  {
+    type: 'privacy',
+    match: 'Privacy Policy'
+  },
+  {
+    type: 'email',
+    match: 'info@ezyrent.org'
+  },
+  {
+    type: 'link',
+    match: 'https://ezyrent.medium.com'
+  },
+  {
+    type: 'link',
+    match: 'https://wa.link/v7j5ie'
   }
 ];
