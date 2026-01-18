@@ -6,6 +6,7 @@ import type { NextConfig } from 'next';
 //     ? "https://ezyrent-web.vercel.app"
 //     : "http://localhost:3000";
 
+
 const nextConfig: NextConfig = {
   // webpack(config, { dev }) {
   //   if (dev) {
@@ -19,6 +20,11 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
         pathname: '**',
+      },
+          {
+        protocol: "https",
+        hostname: "miro.medium.com",
+        pathname: "**",
       },
     ],
   },

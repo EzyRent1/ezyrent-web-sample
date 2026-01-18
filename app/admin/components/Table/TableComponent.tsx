@@ -58,7 +58,7 @@ export default function MuiTableComponent<T>({
           <DataGrid
             rows={rows}
             columns={columns}
-            paginationModel={{ page: page, pageSize }}
+            paginationModel={{ page, pageSize }}
             onPaginationModelChange={handlePaginationChange}
             pageSizeOptions={[5, 10, 20, 50]}
             checkboxSelection={showCheckbox}

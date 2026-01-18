@@ -1,7 +1,7 @@
 import React from 'react';
 import { Control, Controller, FieldErrors } from 'react-hook-form';
-import SelectionButton from './selectionButton';
-import FormError from './FormError';
+import SelectionButton from '../../../components/common/selectionButton';
+import FormError from '../../../components/common/FormError';
 
 export default function RenderSelectionSection({
   control,

@@ -205,7 +205,7 @@ export const DashboardColumns: GridColDef[] = [
     renderCell: ({ value }) => {
       return (
         <span
-          className={` flex gap-1  font-medium text-sm
+          className={` flex gap-1 my-4  font-medium text-sm
           ${
             value === 'published'
               ? ' text-[#7065F0]'

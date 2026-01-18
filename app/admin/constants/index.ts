@@ -1,6 +1,5 @@
 import {
   Banknote,
-  Book,
   CreditCard,
   House,
   LayoutDashboard,
@@ -8,6 +7,7 @@ import {
   TrendingUpDownIcon
 } from 'lucide-react';
 import { BiMessageRoundedDetail } from 'react-icons/bi';
+import { MdOutlineLibraryBooks } from 'react-icons/md';
 import { LuUsers } from 'react-icons/lu';
 
 export const siderbarItems: SidebarItemType[] = [
@@ -23,7 +23,7 @@ export const siderbarItems: SidebarItemType[] = [
   { title: 'analytics', href: '/admin/analytics', icon: TrendingUpDownIcon },
 
   { title: 'tour Mgt.', href: '/admin/tour', icon: CreditCard },
-  { title: 'blogs', href: '/admin/blogs', icon: Book },
+  { title: 'blogs', href: '/admin/blogs', icon: MdOutlineLibraryBooks },
   { title: 'reviews', href: '/admin/reviews', icon: Star }
 ];
 

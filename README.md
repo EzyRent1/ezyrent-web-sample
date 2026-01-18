@@ -3,6 +3,7 @@
 Welcome to the **EzyRent Web** repository! This project is the web version of EzyRent, developed using **Next.js**, **TailwindCSS**, and **TypeScript** for a modern, responsive, and scalable application. The repository follows a structured branching model with `main`, `develop`, and `staging` branches for effective development and deployment.
 
 ---
+
 ## Table of Contents
 
 1. [Branch Overview](#branch-overview)
@@ -34,6 +35,7 @@ Welcome to the **EzyRent Web** repository! This project is the web version of Ez
 - Aggregates changes from `develop` and prepares them for deployment to `main`.
 
 ---
+
 ## Project Architecture
 
 ### Overview
