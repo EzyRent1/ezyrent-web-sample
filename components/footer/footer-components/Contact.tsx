@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 import React, { ElementType } from 'react';
 
 interface Contact {
@@ -9,11 +9,11 @@ interface Contact {
 }
 
 const ContactItems: Contact[] = [
-  {
-    title: 'address',
-    name: '4234 Adetounbo Ademola str, Victoria Island, Lagos. ',
-    icon: MapPin
-  },
+  // {
+  //   title: 'address',
+  //   name: '4234 Adetounbo Ademola str, Victoria Island, Lagos. ',
+  //   icon: MapPin
+  // },
   {
     title: 'phone 1',
     name: '+234-8127-518-838',

@@ -6,6 +6,7 @@ import type { NextConfig } from 'next';
 //     ? "https://ezyrent-web.vercel.app"
 //     : "http://localhost:3000";
 
+
 const nextConfig: NextConfig = {
   // webpack(config, { dev }) {
   //   if (dev) {

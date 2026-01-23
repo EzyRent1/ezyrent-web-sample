@@ -1,55 +1,78 @@
 import React from 'react';
 import Breadcrumb from '@/components/breadcrumb';
 import Link from 'next/link';
-import { privacyPolicySections } from '@/config/privacyPolicy';
+import { privacyPolicySections, SPECIAL_TOKENS } from '@/config/privacyPolicy';
 import MaxWidthWrapper from '../maxWidthWrapper';
 
 export default function PrivacyPolicy() {
-  const renderContent = (content: string) => {
-    // Handle Privacy Policy links
-    if (content.includes('Privacy Policy')) {
-      const parts = content.split('Privacy Policy');
-      return (
-        <>
-          {parts[0]}
-          <Link href="/privacy-policy" className="text-blue-500 underline">
-            Privacy Policy
-          </Link>
-          {parts[1]}
-        </>
-      );
-    }
+  const tokenRegex = new RegExp(
+    `(${SPECIAL_TOKENS.map((t) => t.match.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`,
+    'g'
+  );
 
-    // Handle email links
-    if (content.includes('support@ezrent.ng')) {
-      const parts = content.split('support@ezrent.ng');
-      return (
-        <>
-          {parts[0]}
-          <a
-            href="mailto:support@ezrent.ng"
+  const renderContent = (content: string) => {
+    return content.split(tokenRegex).map((part, index) => {
+      // Privacy Policy
+      if (part === 'Privacy Policy') {
+        return (
+          <Link
+            key={index}
+            href="/privacy-policy"
             className="text-blue-500 underline"
           >
-            support@ezrent.ng
+            Privacy Policy
+          </Link>
+        );
+      }
+
+      // Email
+      if (part === 'info@ezyrent.org') {
+        return (
+          <a
+            key={index}
+            href="mailto:info@ezyrent.org"
+            className="text-blue-500 underline"
+          >
+            info@ezyrent.org
           </a>
-          {parts[1]}
-        </>
-      );
-    }
+        );
+      }
 
-    // Ensure "of" is always lowercase
-    if (/\bof\b/.test(content)) {
-      const parts = content.split(/\bof\b/);
-      return (
-        <>
-          {parts[0]}
-          <span className="lowercase">of</span>
-          {parts[1]}
-        </>
-      );
-    }
+      // External links
+      if (part.startsWith('http')) {
+        return (
+          <a
+            key={index}
+            href={part}
+            className="text-blue-500 underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {part}
+          </a>
+        );
+      }
 
-    return content;
+      // Ensure "of" is lowercase (text-only parts)
+      if (/\bof\b/i.test(part)) {
+        return (
+          <span key={index}>
+            {part.split(/\bof\b/i).map((p, i, arr) =>
+              i < arr.length - 1 ? (
+                <>
+                  {p}
+                  <span className="lowercase">of</span>
+                </>
+              ) : (
+                p
+              )
+            )}
+          </span>
+        );
+      }
+
+      return <span key={index}>{part}</span>;
+    });
   };
 
   return (

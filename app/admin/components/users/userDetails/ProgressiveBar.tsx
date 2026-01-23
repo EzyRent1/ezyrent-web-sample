@@ -16,7 +16,7 @@ export const ProgressBar = ({
       className={`relative w-full  rounded-[5px] overflow-hidden`}
       style={{
         backgroundColor: `${wholeColor}`,
-        height: height
+        height
       }}
     >
       <div
@@ -24,7 +24,7 @@ export const ProgressBar = ({
         style={{
           width: rangePercent,
           backgroundColor: rangeColor,
-          height: height,
+          height,
           borderRadius: rounded
         }}
       ></div>
