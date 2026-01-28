@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { Mail } from 'lucide-react';
+import { Mail, Phone } from 'lucide-react';
 import React, { ElementType } from 'react';
 import { FaWhatsapp } from 'react-icons/fa6';
 
@@ -16,15 +16,21 @@ const ContactItems: Contact[] = [
   //   icon: MapPin
   // },
   {
+    title: 'phone 1',
+    name: '+234-8127-518-838',
+    icon: Phone
+  },
+
+  {
+    title: 'phone 2',
+    name: '+234-7067-456-475',
+    icon: Phone
+  },
+  {
     title: 'whatsapp',
     name: 'https://wa.link/v7j5ie',
     icon: FaWhatsapp
   },
-  // {
-  //   title: 'phone 2',
-  //   name: '+234-7067-456-475',
-  //   icon: Phone
-  // },
   {
     title: 'email',
     name: 'info@ezyrent.org',
@@ -70,9 +76,7 @@ export default function Contact() {
                   item.title !== 'email' && ' capitalize'
                 )}
               >
-                {item.name !== 'https://wa.link/v7j5ie'
-                  ? item.name
-                  : 'WhatsApp'}
+                {item.name}
               </span>
             </a>
           );
