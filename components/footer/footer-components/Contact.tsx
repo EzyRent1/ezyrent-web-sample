@@ -26,7 +26,7 @@ const ContactItems: Contact[] = [
   },
   {
     title: 'email',
-    name: 'ezyrent50@gmail.com',
+    name: 'info@ezyrent.org',
     icon: Mail
   }
 ];
