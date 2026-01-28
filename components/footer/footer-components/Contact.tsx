@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
-import { Mail, Phone } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import React, { ElementType } from 'react';
+import { FaWhatsapp } from 'react-icons/fa6';
 
 interface Contact {
   title: string;
@@ -15,15 +16,15 @@ const ContactItems: Contact[] = [
   //   icon: MapPin
   // },
   {
-    title: 'phone 1',
-    name: '+234-8127-518-838',
-    icon: Phone
+    title: 'whatsapp',
+    name: 'https://wa.link/v7j5ie',
+    icon: FaWhatsapp
   },
-  {
-    title: 'phone 2',
-    name: '+234-7067-456-475',
-    icon: Phone
-  },
+  // {
+  //   title: 'phone 2',
+  //   name: '+234-7067-456-475',
+  //   icon: Phone
+  // },
   {
     title: 'email',
     name: 'info@ezyrent.org',
@@ -42,11 +43,12 @@ export default function Contact() {
             ? `mailto:${item.name}`
             : item.name.match(/^\+?[\d\s-]+$/) // Allows digits, spaces, and dashes
               ? `tel:${item.name.replace(/[\s-]+/g, '')}` // Removes spaces and dashes for tel link
-              : undefined;
+              : item.name; // Assume it's a URL or other link
 
           return (
             <a
               key={index}
+              target={href.startsWith('http') ? '_blank' : undefined}
               href={href}
               className={cn(
                 'w-fit grid grid-cols-[32px_1fr]    text-[#475467]',
@@ -54,6 +56,7 @@ export default function Contact() {
                   ? 'hover:text-opacity-65 transition-colors duration-150 ease-in-out'
                   : ''
               )}
+              rel="noreferrer"
             >
               <Icon
                 size={14}
@@ -67,7 +70,9 @@ export default function Contact() {
                   item.title !== 'email' && ' capitalize'
                 )}
               >
-                {item.name}
+                {item.name !== 'https://wa.link/v7j5ie'
+                  ? item.name
+                  : 'WhatsApp'}
               </span>
             </a>
           );
